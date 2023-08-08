@@ -1,0 +1,1155 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "0a30aafa",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import re"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d05522c5",
+   "metadata": {},
+   "source": [
+    "1)Write a Python program to replace all occurrences of a space, comma, or dot with a\n",
+    "colon.\n",
+    "Sample Text- Python Exercises, PHP exercises.\n",
+    "Expected Output: Python:Exercises::PHP:exercises:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "995acc2c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Python:Exercises::PHP:exercises:\n"
+     ]
+    }
+   ],
+   "source": [
+    "txt='Python Exercises, PHP exercises.'\n",
+    "print(re.sub(\"[ ,.]\", \":\", txt))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "44f0dc5c",
+   "metadata": {},
+   "source": [
+    "2)Write a Python program to find all words starting with a or e; in a given string."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "8df363f4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['ale', 'ansom', 'at', 'erway', 'erating', 'essel', 'any', 'er', 'apparatus', 'etween', 'essel', 'at', 'and']\n"
+     ]
+    }
+   ],
+   "source": [
+    "txt='Riding on the bow, gunwale or transom of a boat while it is underway. · Operating a vessel, skis or any other apparatus between a vessel that is towing and the ..'\n",
+    "print(re.findall(\"[a,e]\\w+\",txt))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "32eabb93",
+   "metadata": {},
+   "source": [
+    "3)Create a function in python to find all words that are at least 4 characters long in a\n",
+    "string. The use of the re.compile() method is mandatory."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "3fb3bda9",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['The', 'fox', 'over', 'the', 'lazy', 'dog']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "text = 'The quick brown fox jumps over the lazy dog.'\n",
+    "rg=re.compile(r\"\\b\\w{1,4}\\b\")\n",
+    "print(rg.findall(text))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6fd05ed2",
+   "metadata": {},
+   "source": [
+    "4)Create a function in python to find all three, four, and five character words in a string.\n",
+    "The use of the re.compile() method is mandatory."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "ff385535",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']\n"
+     ]
+    }
+   ],
+   "source": [
+    "txt=(\"It is a long established fact that a reader\"\n",
+    "            \" will be distracted by the readable content\"\n",
+    "            \" of a page when looking at its layout.\")\n",
+    "rg=re.compile(r\"\\b\\w{3,5}\\b\")\n",
+    "print(rg.findall(text))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "28676649",
+   "metadata": {},
+   "source": [
+    "5- Create a function in Python to remove the parenthesis in a list of strings. The use of the\n",
+    "re.compile() method is mandatory.\n",
+    "Sample Text: [&quot;example (.com)&quot;, &quot;hr@fliprobo (.com)&quot;, &quot;github (.com)&quot;, &quot;Hello (Data Science World)&quot;,\n",
+    "&quot;Data (Scientist)&quot;]\n",
+    "Expected Output:\n",
+    "example.com\n",
+    "hr@fliprobo.com\n",
+    "github.com\n",
+    "Hello Data Science World\n",
+    "Data Scientist"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "793ea5ef",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      ".com\n",
+      ".com\n",
+      ".com\n",
+      "Data Science World\n",
+      "Scientist\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "mystring='[\"example (.com)\", \"hr@fliprobo (.com)\", \"github (.com)\", \"Hello (Data Science World)\",\"Data (Scientist)\"]'\n",
+    "regex = re.compile(\".*?\\((.*?)\\)\")\n",
+    "result = re.findall(regex, mystring)\n",
+    "for item in result:\n",
+    "    print(re.sub(r\" ?\\([^)]+\\)\", \"\", item))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5653187e",
+   "metadata": {},
+   "source": [
+    "6)Write a python program to remove the parenthesis area from the text stored in the text\n",
+    "file using Regular Expression.\n",
+    "Sample Text: [&quot;example (.com)&quot;, &quot;hr@fliprobo (.com)&quot;, &quot;github (.com)&quot;, &quot;Hello (Data Science World)&quot;,\n",
+    "&quot;Data (Scientist)&quot;]\n",
+    "\n",
+    "Expected Output: [&quot;example&quot;, &quot;hr@fliprobo&quot;, &quot;github&quot;, &quot;Hello&quot;, &quot;Data&quot;]\n",
+    "Note- Store given sample text in the text file and then to remove the parenthesis area from the text."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "6ed32869",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "example\n",
+      "hr@fliprobo\n",
+      "github\n",
+      "Hello\n",
+      "Data\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "mystring=[\"example (.com)\", \"hr@fliprobo (.com)\", \"github (.com)\", \"Hello (Data Science World)\",\"Data (Scientist)\"]\n",
+    "for item in mystring:\n",
+    "    print(re.sub(r\" ?\\([^)]+\\)\", \"\", item))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a06882cd",
+   "metadata": {},
+   "source": [
+    "Question 7- Write a regular expression in Python to split a string into uppercase letters.\n",
+    "Sample text: “ImportanceOfRegularExpressionsInPython”\n",
+    "Expected Output: [‘Importance’, ‘Of’, ‘Regular’, ‘Expression’, ‘In’, ‘Python’]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "dd1c808f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['Importance', 'Of', 'Regular', 'Expressions', 'In', 'Python']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def capital(str1):\n",
+    "     return(re.findall('[A-Z][^A-Z]*', str1))\n",
+    "\n",
+    "print(capital(\"ImportanceOfRegularExpressionsInPython\"))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "617e6829",
+   "metadata": {},
+   "source": [
+    "Create a function in python to insert spaces between words starting with capital letters\n",
+    "or with numbers.\n",
+    "Sample Text: “RegularExpression1IsAn2ImportantTopic3InPython&quot;\n",
+    "Expected Output: RegularExpression 1 IsAn 2 ImportantTopic 3 InPython"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "id": "ba2231b3",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "RegularExpression 1IsAn 2ImportantTopic 3InPython\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def capital(str1):\n",
+    "    return re.sub(r\"(\\w)([0-9])\", r\"\\1 \\2\", str1)\n",
+    "print(capital(\"RegularExpression1IsAn2ImportantTopic3InPython\"))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "301936ac",
+   "metadata": {},
+   "source": [
+    "Write a python program to extract email address from the text stored in the text file\n",
+    "using Regular Expression.\n",
+    "Sample Text- Hello my name is Data Science and my email address is xyz@domain.com and alternate\n",
+    "email address is xyz.abc@sdomain.domain.com.\n",
+    "Please contact us at hr@fliprobo.com for further information.\n",
+    "Expected Output:\n",
+    "[&#39;xyz@domain.com&#39;, &#39;xyz.abc@sdomain.domain.com&#39;]\n",
+    "[&#39;hr@fliprobo.com&#39;]\n",
+    "\n",
+    "Note- Store given sample text in the text file and then extract email addresses."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "id": "862781dc",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['xyz@domain.com', 'xyz.abc@sdomain.domain.com', 'hr@fliprobo.com']\n"
+     ]
+    }
+   ],
+   "source": [
+    "text=\"Hello my name is Data Science and my email address is xyz@domain.com and alternate email address is xyz.abc@sdomain.domain.com. Please contact us at hr@fliprobo.com for further information.\"\n",
+    "emails = re.findall(r\"[a-z0-9\\.\\-+_]+@[a-z0-9\\.\\-+_]+\\.[a-z]+\", text)\n",
+    "print (emails)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2bf7038e",
+   "metadata": {},
+   "source": [
+    "Question 11- Write a Python program to match a string that contains only upper and lowercase\n",
+    "letters, numbers, and underscores."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "id": "a9375e81",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Not matched!\n",
+      "Found a match!\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def text_match(text):\n",
+    "        patterns = '^[a-zA-Z0-9_]*$'\n",
+    "        if re.search(patterns,  text):\n",
+    "                return 'Found a match!'\n",
+    "        else:\n",
+    "                return('Not matched!')\n",
+    "\n",
+    "print(text_match(\"The quick brown fox jumps over the lazy dog.\"))\n",
+    "print(text_match(\"Python_Exercises_1\"))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3be8f9c3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Question 12- Write a Python program where a string will start with a specific number."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "id": "b995c94e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "True\n",
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def match_num(string):\n",
+    "    text = re.compile(r\"^5\")\n",
+    "    if text.match(string):\n",
+    "        return True\n",
+    "    else:\n",
+    "        return False\n",
+    "print(match_num('5-2345861'))\n",
+    "print(match_num('6-2345861'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "816dec9d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Question 13- Write a Python program to remove leading zeros from an IP address"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "id": "8a7cbd78",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "216.8.94.196\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "ip = \"216.08.094.196\"\n",
+    "string = re.sub('\\.[0]*', '.', ip)\n",
+    "print(string)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "296f0fef",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Question 14- Write a regular expression in python to match a date string in the form of Month name\n",
+    "followed by day number and year stored in a text file.\n",
+    "Sample text :  On August 15th 1947 that India was declared independent from British colonialism, and\n",
+    "the reins of control were handed over to the leaders of the Country’.\n",
+    "Expected Output- August 15th 1947"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "id": "514fe359",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original date in YYY-MM-DD Format:  2026-01-02\n",
+      "New date in DD-MM-YYYY Format:  02-01-2026\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def date_format(dt):\n",
+    "        return re.sub(r'(\\d{4})-(\\d{1,2})-(\\d{1,2})', '\\\\3-\\\\2-\\\\1', dt)\n",
+    "dt1 = \"2026-01-02\"\n",
+    "print(\"Original date in YYY-MM-DD Format: \",dt1)\n",
+    "print(\"New date in DD-MM-YYYY Format: \",date_format(dt1))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "id": "761f1fa6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Not a valid date\n"
+     ]
+    }
+   ],
+   "source": [
+    "def mon(string):\n",
+    "        \n",
+    "    regex = r\"([a-zA-Z]+) (\\d+)\"\n",
+    "    match = re.match(regex, string)\n",
+    "        \n",
+    "    if match == None: \n",
+    "        print (\"Not a valid date\")\n",
+    "        return\n",
+    "    \n",
+    "    print (\"Given Data: %s\" % (match.group()))\n",
+    "    print (\"Month: %s\" % (match.group(1)))\n",
+    "    print (\"Day: %s\" % (match.group(2)))\n",
+    "mon(\"On August 15th 1947 that India was declared independent from British colonialism, and the reins of control were handed over to the leaders of the Country\")    "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f0576ec3",
+   "metadata": {},
+   "source": [
+    "Question 15- Write a Python program to search some literals strings in a string.\n",
+    "Sample text : The quick brown fox jumps over the lazy dog.\n",
+    "Searched words : ;fox&#39;, &#39;dog&#39;, &#39;horse"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "id": "1ae7b76d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Searching for \"fox\" in \"The quick brown fox jumps over the lazy dog.\" ->\n",
+      "Matched!\n",
+      "Searching for \"dog\" in \"The quick brown fox jumps over the lazy dog.\" ->\n",
+      "Matched!\n",
+      "Searching for \"horse\" in \"The quick brown fox jumps over the lazy dog.\" ->\n",
+      "Not Matched!\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "patterns = [ 'fox', 'dog', 'horse' ]\n",
+    "text = 'The quick brown fox jumps over the lazy dog.'\n",
+    "for pattern in patterns:\n",
+    "    print('Searching for \"%s\" in \"%s\" ->' % (pattern, text),)\n",
+    "    if re.search(pattern,  text):\n",
+    "        print('Matched!')\n",
+    "    else:\n",
+    "        print('Not Matched!')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fa96d443",
+   "metadata": {},
+   "source": [
+    "Question 16- Write a Python program to search a literals string in a string and also find the location\n",
+    "within the original string where the pattern occurs\n",
+    "Sample text : &#39;The quick brown fox jumps over the lazy dog.&#39;\n",
+    "Searched words : &#39;fox&#39;"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "id": "fc5f5c17",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Found \"fox\" in \"The quick brown fox jumps over the lazy dog.\" from 16 to 19 \n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "pattern = 'fox'\n",
+    "text = 'The quick brown fox jumps over the lazy dog.'\n",
+    "match = re.search(pattern, text)\n",
+    "s = match.start()\n",
+    "e = match.end()\n",
+    "print('Found \"%s\" in \"%s\" from %d to %d ' % \\\n",
+    "    (match.re.pattern, match.string, s, e))\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "65df1c3a",
+   "metadata": {},
+   "source": [
+    "Question 17- Write a Python program to find the substrings within a string.\n",
+    "Sample text : &#39;Python exercises, PHP exercises, C# exercises&#39;\n",
+    "Pattern : ;exercises"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "id": "fc367e34",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Found \"exercises\"\n",
+      "Found \"exercises\"\n",
+      "Found \"exercises\"\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "text = 'Python exercises, PHP exercises, C# exercises'\n",
+    "pattern = 'exercises'\n",
+    "for match in re.findall(pattern, text):\n",
+    "    print('Found \"%s\"' % match)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1bed4275",
+   "metadata": {},
+   "source": [
+    "Question 18- Write a Python program to find the occurrence and position of the substrings within a\n",
+    "string."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "id": "eecdbcec",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Found \"exercises\" at 7:16\n",
+      "Found \"exercises\" at 22:31\n",
+      "Found \"exercises\" at 36:45\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "text = 'Python exercises, PHP exercises, C# exercises'\n",
+    "pattern = 'exercises'\n",
+    "for match in re.finditer(pattern, text):\n",
+    "    s = match.start()\n",
+    "    e = match.end()\n",
+    "    print('Found \"%s\" at %d:%d' % (text[s:e], s, e))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "59de1fac",
+   "metadata": {},
+   "source": [
+    "Question 19- Write a Python program to convert a date of yyyy-mm-dd format to dd-mm-yyyy\n",
+    "format."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "id": "d7734173",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original date in YYY-MM-DD Format:  2026-01-02\n",
+      "New date in DD-MM-YYYY Format:  02-01-2026\n"
+     ]
+    }
+   ],
+   "source": [
+    "def change_date_format(dt):\n",
+    "        return re.sub(r'(\\d{4})-(\\d{1,2})-(\\d{1,2})', '\\\\3-\\\\2-\\\\1', dt)\n",
+    "dt1 = \"2026-01-02\"\n",
+    "print(\"Original date in YYY-MM-DD Format: \",dt1)\n",
+    "print(\"New date in DD-MM-YYYY Format: \",change_date_format(dt1))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7db45f7c",
+   "metadata": {},
+   "source": [
+    "Question 20- Create a function in python to find all decimal numbers with a precision of 1 or 2 in a\n",
+    "string. The use of the re.compile() method is mandatory."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "id": "1ef6f1df",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "True\n",
+      "True\n",
+      "True\n",
+      "True\n",
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "def is_decimal(num):\n",
+    "    import re\n",
+    "    dnumre = re.compile(r\"\"\"^[0-9]+(\\.[0-9]{1,2})?$\"\"\")\n",
+    "    result = dnumre.search(num)\n",
+    "    return bool(result)\n",
+    "\n",
+    "print(is_decimal('123.11'))\n",
+    "print(is_decimal('123.1'))\n",
+    "print(is_decimal('123'))\n",
+    "print(is_decimal('0.21'))\n",
+    "\n",
+    "print(is_decimal('123.1214'))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "64fca4bb",
+   "metadata": {},
+   "source": [
+    "Question 21- Write a Python program to separate and print the numbers and their position of a\n",
+    "given string."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "id": "22967599",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "50\n",
+      "Index position: 62\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "text = \"The following example creates an ArrayList with a capacity of 50 elements. Four elements are then added to the ArrayList and the ArrayList is trimmed accordingly.\"\n",
+    "\n",
+    "for m in re.finditer(\"\\d+\", text):\n",
+    "    print(m.group(0))\n",
+    "    print(\"Index position:\", m.start())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "43fee490",
+   "metadata": {},
+   "source": [
+    "Question 22- Write a regular expression in python program to extract maximum/largest numeric\n",
+    "value from a string.\n",
+    "Sample Text: &#39;My marks in each semester are: 947, 896, 926, 524, 734, 950, 642&#39;\n",
+    "Expected Output: 950"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 74,
+   "id": "37ffe16c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Max_value: 950\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "txt = 'My marks in each semester are: 947, 896, 926, 524, 734, 950, 642'\n",
+    "numbers = re.findall('\\d+',txt)\n",
+    "number = map(int,numbers)\n",
+    "\n",
+    "\n",
+    "print(\"Max_value:\",max(number))\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d604a9ea",
+   "metadata": {},
+   "source": [
+    "Question 23- Create a function in python to insert spaces between words starting with capital\n",
+    "letters.\n",
+    "Sample Text: “RegularExpressionIsAnImportantTopicInPython&quot;\n",
+    "Expected Output: Regular Expression Is An Important Topic In Python"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "id": "1b690dc7",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Regular Expression Is An Important Topic In Python\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def capital_words_spaces(str1):\n",
+    "    return re.sub(r\"(\\w)([A-Z])\", r\"\\1 \\2\", str1)\n",
+    "\n",
+    "print(capital_words_spaces(\"RegularExpressionIsAnImportantTopicInPython\"))\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5b024688",
+   "metadata": {},
+   "source": [
+    "Question 24- Python regex to find sequences of one upper case letter followed by lower case letters"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "id": "6a1660bd",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Found a match!\n",
+      "Found a match!\n",
+      "Not matched!\n"
+     ]
+    }
+   ],
+   "source": [
+    "def text_match(text):\n",
+    "        patterns = '[A-Z]+[a-z]+$'\n",
+    "        if re.search(patterns, text):\n",
+    "                return 'Found a match!'\n",
+    "        else:\n",
+    "                return('Not matched!')\n",
+    "print(text_match(\"AaBbGg\"))\n",
+    "print(text_match(\"Python\"))\n",
+    "print(text_match(\"python\"))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bc8f4c83",
+   "metadata": {},
+   "source": [
+    "Question 25- Write a Python program to remove continuous duplicate words from Sentence using\n",
+    "Regular Expression.\n",
+    "Sample Text: ;Hello hello world world\n",
+    "Expected Output: Hello hello world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "id": "9a23fa86",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Hello world\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "\n",
+    "def removeDuplicatesFromText(text):\n",
+    "    regex = r'\\b(\\w+)(?:\\W+\\1\\b)+' \n",
+    "    return re.sub(regex, r'\\1', text, flags=re.IGNORECASE)\n",
+    "\n",
+    "str1 = \"Hello hello world world\"\n",
+    "print(removeDuplicatesFromText(str1))\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bc6b2b6c",
+   "metadata": {},
+   "source": [
+    "Question 26- Write a python program using RegEx to accept string ending with alphanumeric\n",
+    "character."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "id": "d5b6edab",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The string is :\n",
+      "Python1245\n",
+      "The string ends with alphanumeric character\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "\n",
+    "regex_expression = '[a-zA-z0-9]$'\n",
+    "\n",
+    "def check_string(my_string):\n",
+    "\n",
+    "    if(re.search(regex_expression, my_string)):\n",
+    "      print(\"The string ends with alphanumeric character\")\n",
+    "\n",
+    "    else:\n",
+    "      print(\"The string doesnot end with alphanumeric character\")\n",
+    "\n",
+    "\n",
+    "my_string = \"Python1245\"\n",
+    "print(\"The string is :\")\n",
+    "print(my_string)\n",
+    "check_string(my_string)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a2bac49c",
+   "metadata": {},
+   "source": [
+    "Question 27-Write a python program using RegEx to extract the hashtags.\n",
+    "Sample Text: &quot;&quot;&quot;RT @kapil_kausik: #Doltiwal I mean #xyzabc is &quot;hurt&quot; by #Demonetization as the same\n",
+    "has rendered USELESS &lt;ed&gt;&lt;U+00A0&gt;&lt;U+00BD&gt;&lt;ed&gt;&lt;U+00B1&gt;&lt;U+0089&gt; &quot;acquired funds&quot; No wo&quot;&quot;&quot;\n",
+    "Expected Output: [&#39;#Doltiwal&#39;, &#39;#xyzabc&#39;, &#39;#Demonetization&#39;]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 89,
+   "id": "d079ba5c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The hashtags in \"&quot;&quot;&quot;RT @kapil_kausik: #Doltiwal I mean #xyzabc is &quot;hurt&quot; by #Demonetization as the same has rendered USELESS &lt;ed&gt;&lt;U+00A0&gt;&lt;U+00BD&gt;&lt;ed&gt;&lt;U+00B1&gt;&lt;U+0089&gt; &quot;acquired funds&quot; No wo&quot;&quot;&quot\" are :\n",
+      "Doltiwal\n",
+      "xyzabc\n",
+      "Demonetization\n",
+      "None\n"
+     ]
+    }
+   ],
+   "source": [
+    "def extract_hashtags(text):\n",
+    "    regex = \"#(\\w+)\"\n",
+    "    hashtag_list = re.findall(regex, text)\n",
+    "    print(\"The hashtags in \\\"\" + text + \"\\\" are :\")\n",
+    "    for hashtag in hashtag_list:\n",
+    "        print(hashtag)\n",
+    "text1=\"&quot;&quot;&quot;RT @kapil_kausik: #Doltiwal I mean #xyzabc is &quot;hurt&quot; by #Demonetization as the same has rendered USELESS &lt;ed&gt;&lt;U+00A0&gt;&lt;U+00BD&gt;&lt;ed&gt;&lt;U+00B1&gt;&lt;U+0089&gt; &quot;acquired funds&quot; No wo&quot;&quot;&quot\"        \n",
+    "print(extract_hashtags(text1))       "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "61e02d21",
+   "metadata": {},
+   "source": [
+    "Question 28- Write a python program using RegEx to remove &lt;U+..&gt; like symbols\n",
+    "Check the below sample text, there are strange symbols something of the sort &lt;U+..&gt; all over the place.\n",
+    "You need to come up with a general Regex expression that will cover all such symbols.\n",
+    "Sample Text: &quot;@Jags123456 Bharat band on\n",
+    "28??&lt;ed&gt;&lt;U+00A0&gt;&lt;U+00BD&gt;&lt;ed&gt;&lt;U+00B8&gt;&lt;U+0082&gt;Those who are protesting #demonetization are\n",
+    "all different party leaders&quot;\n",
+    "Expected Output: @Jags123456 Bharat band on 28??&lt;ed&gt;&lt;ed&gt;Those who are protesting\n",
+    "#demonetization are all different party leaders"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "id": "fdf54ab8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "@Jags123456 Bharat band on 28??&lt;U+00A0&gt;&lt;U+00BD&gt;&lt;U+00B8&gt;&lt;U+0082&gt;Those who are protesting #demonetization areall different party leaders\n"
+     ]
+    }
+   ],
+   "source": [
+    "string=\"@Jags123456 Bharat band on 28??&lt;ed&gt;&lt;U+00A0&gt;&lt;U+00BD&gt;&lt;ed&gt;&lt;U+00B8&gt;&lt;U+0082&gt;Those who are protesting #demonetization areall different party leaders\"\n",
+    "string = re.sub('&lt;/?[a-z]+&gt;', '', string)\n",
+    "string = string.replace('&amp;amp;', '&')\n",
+    "\n",
+    "print(string) "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "73cd8198",
+   "metadata": {},
+   "source": [
+    "Question 29- Write a python program to extract dates from the text stored in the text file.\n",
+    "Sample Text: Ron was born on 12-09-1992 and he was admitted to school 15-12-1999.\n",
+    "Note- Store this sample text in the file and then extract dates."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "id": "eb4b499f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['12-09-1992', '15-12-1999']\n"
+     ]
+    }
+   ],
+   "source": [
+    "fileName='Ron was born on 12-09-1992 and he was admitted to school 15-12-1999'\n",
+    "print(re.findall(\"([0-9]{2}\\-[0-9]{2}\\-[0-9]{4})\", fileName))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0e6b8253",
+   "metadata": {},
+   "source": [
+    "Question 30- Create a function in python to remove all words from a string of length between 2 and\n",
+    "4.\n",
+    "The use of the re.compile() method is mandatory.\n",
+    "Sample Text: &quot;The following example creates an ArrayList with a capacity of 50 elements. 4 elements\n",
+    "are then added to the ArrayList and the ArrayList is trimmed accordingly.&quot;\n",
+    "Expected Output: following example creates ArrayList a capacity elements. 4 elements added ArrayList\n",
+    "ArrayList trimmed accordingly."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "id": "62cb5975",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " following example creates ArrayList a capacity elements. 4 elements added ArrayList ArrayList trimmed accordingly.\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "text = \"The following example creates an ArrayList with a capacity of 50 elements. 4 elements are then added to the ArrayList and the ArrayList is trimmed accordingly.\"\n",
+    "\n",
+    "shortword = re.compile(r'\\W*\\b\\w{2,4}\\b')\n",
+    "print(shortword.sub('', text))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "07bffaa2",
+   "metadata": {},
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9cab2226",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b993154d",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b709a33a",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3562764d",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cdd7086c",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7db03413",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8e337d1f",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
